@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Devfaysal\BangladeshGeocode\Models\Division;
@@ -199,16 +200,18 @@ class AgentController extends Controller
         ]);
       }
 
-      public function statusUpdate( $id){
+      public function statusUpdate($id,$status){
 
-          if ('status' == 1){
-              $data = Agent::findOrFail($id)->update(['status' => 0]);
+//        dd($id,$status);
+          if ($status == 1){
+              $data = Agent::find($id)->update(['status' => 0]);
 
-          }elseif('status' == 0){
-              $data= Agent::findOrFail($id)->update(['status' => 1]);
+
+          }elseif($status == 0){
+              $data = Agent::find($id)->update(['status' => 1]);
           }
 
-
+          return response(['message'=>'Status Updated']);
 
 //        dd($id);
 

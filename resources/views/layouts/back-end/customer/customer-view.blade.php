@@ -14,7 +14,9 @@ php artisan serve
 @endsection
 
 @section('content')
+
     <div class="content-wrapper" id="app">
+
         <div class="container-fluid">
 
             <div class="row" style="margin-top: 20px">
@@ -36,9 +38,9 @@ php artisan serve
                                 </div>
                             </form>
                             <!-- End Search -->
-                            {{-- <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                             <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Add Agent
-                            </a>  --}}
+                            </a>
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAgent"> Add
                                 Customer</button>
 
@@ -48,7 +50,7 @@ php artisan serve
                                 <table style="text-align: left;"
                                        class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                                     <thead class="thead-light">
-                                    <tr>
+                                    <tr >
                                         <th scope="col">Sl</th>
                                         <th scope="col">Customer Name</th>
                                         <th scope="col">Zone/Area</th>
@@ -62,7 +64,13 @@ php artisan serve
                                     </tr>
                                     </thead>
                                     <tbody>
-                                     <tr></tr>
+                                    <tr v-for="(item, index) in lists" :key="item.id">
+                                        <td>@{{  item.code }}</td>
+                                        <td>@{{  item.code }}</td>
+                                        <td>@{{  item.code }}</td>
+                                        <td>@{{  item.code }}</td>
+
+                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -74,8 +82,8 @@ php artisan serve
             </div>
         </div>
 
-        {{-- Model Start --}}
-        {{-- addAgent model Start --}}
+{{--         Model Start --}}
+{{--         addAgent model Start --}}
         <div class="modal fade" id="addAgent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -84,7 +92,7 @@ php artisan serve
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="saveForm" @submit.prevent="saveAgent()" enctype="multipart/form-data">
+                        <form id="saveForm" @submit.prevent="view()" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col">
@@ -208,9 +216,9 @@ php artisan serve
                 </div>
             </div>
         </div>
-        {{-- addAgent model End --}}
+{{--         addAgent model End --}}
 
-        {{-- edit Agent model Start --}}
+{{--         edit Agent model Start --}}
         <div class="modal fade fadeEdit " id="editAgent" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -343,13 +351,9 @@ php artisan serve
                 </div>
             </div>
         </div>
-        {{-- edit Agent model end --}}
+{{--         edit Agent model end --}}
 
-
-
-        {{-- Model End --}}
-
-
+{{--        --}}{{-- Model End --}}
 
     </div>
 
@@ -390,15 +394,24 @@ php artisan serve
                 methods: {
 
                     view() {
-                        axios.get("/agent/getData")
-                            .then(response => {
-                                // console.log(response);
-                                this.lists = response.data.agent;
-                                this.districts = response.data.districts;
-                                this.divisions = response.data.divisions;
-                                this.bank = response.data.bank;
-                            });
+                        axios
+                            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+                            .then(response => (this.lists = response))
+                        console.log(response)
+
+
+                        // axios.get("/agent/getData")
+                        //     .then(response => {
+                        //         // console.log(response);
+                        //         this.lists = response.data.agent;
+                        //         // this.lists = response.data.agent;
+                        //         this.districts = response.data.districts;
+                        //         this.divisions = response.data.divisions;
+                        //         this.bank = response.data.bank;
+                        //     });
+
                     },
+
                     onImageChange(e) {
                         this.form.image = e.target.files[0];
                     },

@@ -34,7 +34,7 @@ Route::prefix('agent')->group(function () {
     Route::post('/update/{agent_id}',[AgentController::class,'update']);
     Route::get('/remove/{agent_id}',[AgentController::class,'removeAgent']);
 });
-Route::put('/agent-update-status/{id}',[AgentController::class,'statusUpdate']);
+Route::put('/agent-update-status/{id}/{status}',[AgentController::class,'statusUpdate']);
 
 
 /// Bank

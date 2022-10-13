@@ -94,7 +94,7 @@ php artisan serve
 
                                             <td>
                                                 <label class="switch switch-status">
-                                                    <input type="checkbox" v-model="item.status == 1 ? 'checked': '' " class="status" id="31" @click.preven="statusUpdate(item.id)">
+                                                    <input type="checkbox" class="status" @click.preven="statusUpdate(item.id,index)">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
@@ -103,7 +103,7 @@ php artisan serve
                                                 <button @click.prevent="edit(item.id)" type="button"
                                                     class="btn btn-info btn-sm" data-toggle="modal"
                                                     data-target="#editAgent">
-                                                    <i class="tio-edit"></i>Edit</button>
+                                                    <i class="tio-edit"></i> Edit</button>
 
                                                 <button @click.prevent="deleteagent(item.id)"
                                                     class="btn btn-danger btn-sm delete">
@@ -435,7 +435,10 @@ php artisan serve
                         password: "",
                         status: ""
 
-                    }
+                    },
+                    checked:'',
+
+
                 },
                 methods: {
 
@@ -587,8 +590,21 @@ php artisan serve
 
                     //   },
 
-                    statusUpdate  (id) {
-                        axios.put(`/agent-update-status/${id}`)
+                    statusUpdate  (id,index) {
+
+                        console.log(this.lists[index].status,id);
+                        let status;
+                        if(this.lists[index].status)
+                        {
+                            status = 1;
+                        }
+                        else
+                        {
+                            status = 0;
+                        }
+
+
+                        axios.put(`/agent-update-status/${id}/${status}`)
                             .then(() => {
                                 Swal.fire({
                                     position: 'top-end',
