@@ -1,117 +1,91 @@
-{{--php artisan serve--}}
 @extends('layouts.back-end.app')
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
-
 <style>
     table {
         min-width: max-content;
     }
 </style>
-
 @section('title')
-    Agent -Page
+    Customer -Sales Report
 @endsection
+
 
 @section('content')
     <div class="content-wrapper" id="app">
         <div class="container-fluid">
+
             <div class="row" style="margin-top: 20px">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <!-- Search -->
-                            <form>
-                                <div class="input-group input-group-merge input-group-flush">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="tio-search"></i>
-                                        </div>
-                                    </div>
-                                    <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                        placeholder="Search Brands" aria-label="Search orders" value="hp"
-                                        required="">
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                </div>
-                            </form>
-                            <!-- End Search -->
-                            {{-- <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Add Agent
-                            </a>  --}}
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAgent"> Add
-                                Agent</button>
+                        {{--                        <div class="card-header">--}}
+                        {{--                            <!-- Search -->--}}
+                        {{--                            <div class="justify-content-between">--}}
+                        {{--                                <div class="card-header-left">--}}
+                        {{--                                    <h4 class="card-header-title">All Customer History</h4>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="card-header-right">--}}
+                        {{--                                    <span class="ml-5">Print</span> <button type="button" class="btn btn-warning"><i class="tio-print"></i></button><br><br>--}}
+                        {{--                                    <form>--}}
+                        {{--                                        <div class="input-group input-group-merge input-group-flush">--}}
+                        {{--                                            <div class="input-group-prepend">--}}
+                        {{--                                                <div class="input-group-text">--}}
+                        {{--                                                    <i class="tio-search"></i>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            <input id="datatableSearch_" type="search" name="search" class="form-control"--}}
+                        {{--                                                   placeholder="Search Brands" aria-label="Search orders" value="hp"--}}
+                        {{--                                                   required="">--}}
+                        {{--                                            <button type="submit" class="btn btn-primary">Search</button>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </form>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+                        <div class=card-header>
+                            <h4 class="card-header-title">All Agent Sale & Commission Report</h4>
 
+                            <div class=card-header-form>
+                                <form class=form-inline id=sorting>
+                                    <div class=input-group>
+                                        <input type="text" class="form-control m-2" name="q" value="" placeholder="Search"/>
+                                    </div>
+                                </form>
+                                <span class="ml-7"></span><button type="button" class="btn btn-warning ml-10"><i class="tio-print"></i> Print</button>
+                            </div>
                         </div>
-                        <div class="card-body" style="padding: 0">
+                        <div class="card-body">
                             <div class="table-responsive">
                                 <table style="text-align: left;"
-                                    class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                                       class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                                     <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">Sl</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Agent ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Registration Date</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Mobile Number 1</th>
-                                            <th scope="col">Mobile Number 2</th>
-                                            <th scope="col">Zone/Area</th>
-                                            <th scope="col">Division</th>
-                                            <th scope="col">Present Address</th>
-                                            <th scope="col">Permanent Address</th>
-                                            <th scope="col">Bank Name</th>
-                                            <th scope="col">Account Number</th>
-                                            <th scope="col">Mobile Banking</th>
-                                            <th scope="col">Banking Mobile Number</th>
-                                            <th scope="col">Active Status</th>
-                                            <th scope="col" style="width: 100px" class="text-center">
-                                                Action
-                                            </th>
-                                        </tr>
+                                    <tr>
+                                        <th scope="col">Registration Date</th>
+                                        <th scope="col">Agent ID</th>
+                                        <th scope="col">Agent Name</th>
+                                        <th scope="col">Zone/Area</th>
+                                        <th scope="col">Division</th>
+                                        <th scope="col">Total Sale</th>
+                                        <th scope="col">Total Commission</th>
+                                        <th scope="col">Total Withdraw</th>
+                                        <th scope="col">Balance</th>
+                                        <th scope="col">Total Withdraw</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" style="width: 100px" class="text-center">
+                                            Action
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, index) in lists" :key="item.id">
-                                            <td>@{{ index + 1 }}</td>
-                                            <td> <img style="width:80px;heigth:80px;" v-bind:src="'/images/' +item.agent_info.image"
-                                                    class="img-thumbnail rounded-circle" /> </td>
-                                            <td>@{{ item.agent_info.agent_Autostring_id }}</td>
-                                            <td>@{{ item.name }}</td>
-                                            <td>@{{ item.agent_info.registration_date }}</td>
-                                            <td>@{{ item.email }}</td>
-                                            <td>@{{ item.agent_info.mobileNumber1 }}</td>
-                                            <td>@{{ item.agent_info.mobileNumber2 }}</td>
-                                            <td>@{{ item.agent_info.agent_zone_area }}</td>
-                                            <td>@{{ item.agent_info.agent_division }}</td>
-                                            <td>@{{ item.agent_info.present_address }}</td>
-                                            <td>@{{ item.agent_info.permanent_address }}</td>
-                                            <td>@{{ item.payment_details.bank_name.full_name }}</td>
-                                            <td>@{{ item.payment_details.account_number }}</td>
-                                            <td>@{{ item.payment_details.Mobile_banking }}</td>
-                                            <td>@{{ item.payment_details.banking_mobile_number }}</td>
-
-                                            <td>
-                                                <label class="switch switch-status">
-                                                    <input type="checkbox" class="status" @click.preven="statusUpdate(item.id,index)">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('all.customer') }}" class="btn btn-sm btn-primary"><i class="tio-user"></i> Customer</a>
-                                                <button @click.prevent="edit(item.id)" type="button"
-                                                    class="btn btn-info btn-sm" data-toggle="modal"
-                                                    data-target="#editAgent">
-                                                    <i class="tio-edit"></i> Edit</button>
-
-                                                <button @click.prevent="deleteagent(item.id)"
-                                                    class="btn btn-danger btn-sm delete">
-                                                    <i class="tio-add-to-trash"></i>
-                                                    delete
-                                                </button>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <a href="" class="btn btn-secondary"><i class="tio-view"></i></a>
+                                            <a href="" class="btn btn-warning"><i class="tio-view"></i></a>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -139,7 +113,7 @@
                                 <div class="col">
                                     <label for="image">Choose Image</label>
                                     <input type="file" ref="fileInput" v-on:change="onImageChange" name="image"
-                                        accept="image/*" onchange="loadFile(event)" class="form-control" required>
+                                           accept="image/*" onchange="loadFile(event)" class="form-control" required>
 
                                 </div>
                                 <div class="col">
@@ -149,7 +123,7 @@
                                 <div class="col">
                                     <label for="registration_date">Registration Date</label>
                                     <input type="date" class="form-control mt-2" id="registration_date"
-                                        v-model="form.registration_date" />
+                                           v-model="form.registration_date" />
                                 </div>
                             </div>
                             <div class="row mt-4">
@@ -157,20 +131,20 @@
                                 <div class="col">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control mt-2" id="name"
-                                        v-model="form.name"placeholder="Full Name" />
+                                           v-model="form.name"placeholder="Full Name" />
                                 </div>
 
                                 <div class="col">
                                     <label for="phone_one">Mobile Number 1</label>
                                     <input type="tel" class="form-control mt-2" id="phone_one"
-                                        v-model="form.mobileNumber1" placeholder="+8801754XXXXXX">
+                                           v-model="form.mobileNumber1" placeholder="+8801754XXXXXX">
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
                                     <label for="phone_two">Mobile Number 2</label>
                                     <input type="tel" class="form-control mt-2" id="phone_two"
-                                        v-model="form.mobileNumber2" placeholder="+8801854XXXXXX">
+                                           v-model="form.mobileNumber2" placeholder="+8801854XXXXXX">
                                 </div>
                                 <div class="col">
                                     <label for="name"> Zone Area</label>
@@ -199,7 +173,7 @@
                                     <div class="col">
                                         <label for="permanent_address">Permanent Address</label>
                                         <textarea v-model="form.permanent_address" id="permanent_address" class="form-control mt-2" cols="37"
-                                            rows="2" placeholder="Permanent Address"></textarea>
+                                                  rows="2" placeholder="Permanent Address"></textarea>
                                     </div>
                                 </div>
                                 <div class="col"></div>
@@ -218,17 +192,17 @@
                                 <div class="col">
                                     <label for="account_number" class="mt-2">Account Number</label>
                                     <input type="number" class="form-control mt-2" id="account_number"
-                                        v-model="form.account_number" placeholder="Account Number" />
+                                           v-model="form.account_number" placeholder="Account Number" />
                                 </div>
                                 <div class="col">
                                     <label for="mobile_banking" class="mt-2">Mobile Banking</label>
                                     <input type="text" class="form-control mt-2" id="mobile_banking"
-                                        v-model="form.Mobile_banking" placeholder="Mobile Banking">
+                                           v-model="form.Mobile_banking" placeholder="Mobile Banking">
                                 </div>
                                 <div class="col">
                                     <label for="phone" class="mt-2">Banking Mobile Number </label>
                                     <input type="tel" class="form-control mt-2" id="phone"
-                                        v-model="form.banking_mobile_number" placeholder="+8801754XXXXXX">
+                                           v-model="form.banking_mobile_number" placeholder="+8801754XXXXXX">
                                 </div>
 
                             </div>
@@ -237,12 +211,12 @@
                                 <div class="col-3">
                                     <label for="email_two" class="mt-2">Email</label>
                                     <input type="email" class="form-control mt-2" id="email_two" v-model="form.email"
-                                        placeholder="Email" />
+                                           placeholder="Email" />
                                 </div>
                                 <div class="col-3">
                                     <label for="password" class="mt-2">Password</label>
                                     <input type="password" class="form-control mt-2" id="password"
-                                        v-model="form.password" placeholder="Password" />
+                                           v-model="form.password" placeholder="Password" />
                                 </div>
                                 <div class="col-3"></div>
                                 <div class="col-3"></div>
@@ -260,8 +234,8 @@
         {{-- addAgent model End --}}
 
         {{-- edit Agent model Start --}}
-         <div class="modal fade fadeEdit " id="editAgent" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade fadeEdit " id="editAgent" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -275,11 +249,11 @@
                                 <div class="col">
                                     <label for="image">Choose Image</label>
                                     <input type="file" ref="fileInput" v-on:change="onImageUpdate" name="image"
-                                        accept="image/*" onchange="loadFiles(event)" class="form-control" required>
+                                           accept="image/*" onchange="loadFiles(event)" class="form-control" required>
                                 </div>
                                 <div class="col">
                                     <img class="img-thumbnail rounded-circle"
-                                        style="width:100px; heigth:100px;" id="outputEdit" />
+                                         style="width:100px; heigth:100px;" id="outputEdit" />
                                 </div>
                                 <div class="col"></div>
                                 <div class="col"> </div>
@@ -290,25 +264,25 @@
                                 <div class="col">
                                     <label for="agent_id">Agent ID</label>
                                     <input type="text" class="form-control mt-2" id="agent_id"
-                                        v-model="form.agent_id" placeholder="# AG123"  readonly/>
+                                           v-model="form.agent_id" placeholder="# AG123"  readonly/>
                                 </div>
                                 <div class="col">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control mt-2" id="name"
-                                        v-model="form.name"placeholder="Full Name" />
+                                           v-model="form.name"placeholder="Full Name" />
                                 </div>
 
                                 <div class="col">
                                     <label for="phone_one">Mobile Number 1</label>
                                     <input type="tel" class="form-control mt-2" id="phone_one"
-                                        v-model="form.mobileNumber1" placeholder="+8801754XXXXXX">
+                                           v-model="form.mobileNumber1" placeholder="+8801754XXXXXX">
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col">
                                     <label for="phone_two">Mobile Number 2</label>
                                     <input type="tel" class="form-control mt-2" id="phone_two"
-                                        v-model="form.mobileNumber2" placeholder="+8801854XXXXXX">
+                                           v-model="form.mobileNumber2" placeholder="+8801854XXXXXX">
                                 </div>
                                 <div class="col">
                                     <label for="name"> Zone Area</label>
@@ -337,7 +311,7 @@
                                     <div class="col">
                                         <label for="permanent_address">Permanent Address</label>
                                         <textarea v-model="form.permanent_address" id="permanent_address" class="form-control mt-2" cols="37"
-                                            rows="2" placeholder="Permanent Address"></textarea>
+                                                  rows="2" placeholder="Permanent Address"></textarea>
                                     </div>
                                 </div>
                                 <div class="col"></div>
@@ -348,22 +322,22 @@
                                 <div class="col">
                                     <label for="bank_details" class="mt-2">Bank Name</label>
                                     <input type="text" class="form-control mt-2" id="bank_details"
-                                        v-model="form.bank_name" placeholder="Bank Details" />
+                                           v-model="form.bank_name" placeholder="Bank Details" />
                                 </div>
                                 <div class="col">
                                     <label for="account_number" class="mt-2">Account Number</label>
                                     <input type="number" class="form-control mt-2" id="account_number"
-                                        v-model="form.account_number" placeholder="Account Number" />
+                                           v-model="form.account_number" placeholder="Account Number" />
                                 </div>
                                 <div class="col">
                                     <label for="mobile_banking" class="mt-2">Mobile Banking</label>
                                     <input type="text" class="form-control mt-2" id="mobile_banking"
-                                        v-model="form.Mobile_banking" placeholder="Mobile Banking">
+                                           v-model="form.Mobile_banking" placeholder="Mobile Banking">
                                 </div>
                                 <div class="col">
                                     <label for="phone" class="mt-2">Banking Mobile Number </label>
                                     <input type="tel" class="form-control mt-2" id="phone"
-                                        v-model="form.banking_mobile_number" placeholder="+8801754XXXXXX">
+                                           v-model="form.banking_mobile_number" placeholder="+8801754XXXXXX">
                                 </div>
 
                             </div>
@@ -372,12 +346,12 @@
                                 <div class="col-3">
                                     <label for="email_two" class="mt-2">Email</label>
                                     <input type="email" class="form-control mt-2" id="email_two" v-model="form.email"
-                                        placeholder="Email" />
+                                           placeholder="Email" />
                                 </div>
                                 <div class="col-3">
                                     <label for="password" class="mt-2">Password</label>
                                     <input type="password" class="form-control mt-2" id="password"
-                                        v-model="form.password" placeholder="Password" />
+                                           v-model="form.password" placeholder="Password" />
                                 </div>
                                 <div class="col-3"></div>
                                 <div class="col-3"></div>
@@ -417,28 +391,9 @@
                     errors: [],
                     form: {
                         id: "",
-                         image: "",
-                        registration_date: "",
-                        agent_id: "",
-                        name: "",
-                        mobileNumber1: "",
-                        mobileNumber2: "",
-                        agent_zone_area: "",
-                        agent_division: "",
-                        present_address: "",
-                        permanent_address: "",
-                        bank_name: "",
-                        account_number: "",
-                        Mobile_banking: "",
-                        banking_mobile_number: "",
-                        email: "",
-                        password: "",
-                        status: ""
-
-                    },
-                    checked:'',
 
 
+                    }
                 },
                 methods: {
 
@@ -447,9 +402,7 @@
                             .then(response => {
                                 // console.log(response);
                                 this.lists = response.data.agent;
-                                this.districts = response.data.districts;
-                                this.divisions = response.data.divisions;
-                                this.bank = response.data.bank;
+
                             });
                     },
                     onImageChange(e) {
@@ -458,14 +411,15 @@
                     onImageUpdate(e) {
                         this.form.image = e.target.files[0];
                         this.form.image = this.current.image;
-                },
+                    },
                     saveAgent() {
                         var formData = new FormData();
                         Object.entries(this.form).forEach(([key, value]) => {
                             formData.append(key, value);
                         });
 
-                        axios.post("/agent/store_agent_data/",formData )
+                        axios
+                            .post("/agent/store_agent_data/",formData )
                             .then(() => {
                                 Swal.fire({
                                     position: 'top-end',
@@ -506,33 +460,32 @@
                                 this.form.name = agent.name;
                                 this.form.email = agent.email;
                                 this.form.password = agent.password;
-                                this.form.status = agent.status;
                             });
                     },
-                                 updateAgent(agent_id){
-                                    var formData = new FormData();
-                                    Object.entries(this.form).forEach(([key, value]) => {
-                                    formData.append(key, value);
-                                     });
-                                    axios
-                                    .post(`/agent/update/${agent_id}`,tformData)
-                                    .then(response=>{
-                                         this.view();
+                    updateAgent(agent_id){
+                        var formData = new FormData();
+                        Object.entries(this.form).forEach(([key, value]) => {
+                            formData.append(key, value);
+                        });
+                        axios
+                            .post(`/agent/update/${agent_id}`,tformData)
+                            .then(response=>{
+                                this.view();
 
-                                        let listData=this.form;
+                                let listData=this.form;
 
-                                        this.lists.map(function(obj,index){
-                                            if(obj.id==customer_id){
-                                                 this.lists.$set(index, listData);
-                                                // lists[index].customer_id = this.form.customer_id;
-                                                // console.log(this.lists[index].customer_id);
+                                this.lists.map(function(obj,index){
+                                    if(obj.id==customer_id){
+                                        this.lists.$set(index, listData);
+                                        // lists[index].customer_id = this.form.customer_id;
+                                        // console.log(this.lists[index].customer_id);
 
-                                            }
-                                            })
+                                    }
+                                })
 
 
-                                    })
-                                },
+                            })
+                    },
 
 
                     deleteagent(agent_id) {
@@ -590,37 +543,8 @@
 
                     //   },
 
-                    statusUpdate  (id,index) {
 
-                        console.log(this.lists[index].status,id);
-                        let status;
-                        if(this.lists[index].status)
-                        {
-                            status = 1;
-                        }
-                        else
-                        {
-                            status = 0;
-                        }
-
-
-                        axios.put(`/agent-update-status/${id}/${status}`)
-                            .then(() => {
-                                Swal.fire({
-                                    position: 'top-end',
-                                    icon: 'success',
-                                    title: 'Status Updated Successfully',
-                                    showConfirmButton: false,
-                                    timer: 3500
-                                })
-                                this.view();
-                            })
-                            .catch((error) => (this.errors.push = error.response.data.errors));
-                    },
                 },
-
-
-
                 mounted() {
                     this.view();
                 }
@@ -652,7 +576,7 @@
             // ===========edit from data===============
         </script>
         <Script>
-               var loadFiles = function(event) {
+            var loadFiles = function(event) {
                 var output = document.getElementById('outputEdit');
                 output.src = URL.createObjectURL(event.target.files[0]);
                 woutput.onload = function() {
@@ -660,9 +584,10 @@
                 }
             };
         </Script>
-    @endpush
+        @endpush
 
-    </body>
+        </body>
 
-    </html>
-@endsection
+        </html>
+        @endsection
+

@@ -67,7 +67,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Dashboards</strong> </a>
+                                <a href="{{ route('dashboard') }}"><i class="tio-dashboard nav-icon"></i> <strong>Dashboard</strong> </a>
 
                                 </span>
                             </a>
@@ -79,7 +79,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('agent_list') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Agent</strong> </a>
+                                <a href="{{ route('agent_list') }}"><i class="tio-home nav-icon"></i> <strong>Agent</strong> </a>
 
                                 </span>
                             </a>
@@ -90,7 +90,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('bank.list') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Bank</strong> </a>
+                                <a href="{{ route('bank.list') }}"><i class="tio-home-outlined nav-icon"></i> <strong>Bank</strong> </a>
 
                                 </span>
                             </a>
@@ -101,7 +101,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('customer') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Customer</strong> </a>
+                                <a href="{{ route('customer') }}"><i class="tio-user nav-icon"></i> <strong>Customer</strong> </a>
 
                                 </span>
                             </a>
@@ -112,7 +112,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Agent Sale Report</strong> </a>
+                                <a href="{{ route('customer.oder.history') }}"><i class="tio-history nav-icon"></i> <strong>All Customer Order History </strong> </a>
 
                                 </span>
                             </a>
@@ -123,7 +123,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>Agent Sale Report</strong> </a>
+                                <a href="{{ route('single.customer.oder.history') }}"><i class="tio-poi-user nav-icon"></i> <strong>Single Customer Order History </strong> </a>
 
                                 </span>
                             </a>
@@ -134,7 +134,26 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>All Customer Order  History</strong> </a>
+                                <a href="{{ route('agent.sale.report') }}"><i class="tio-report-outlined nav-icon"></i> <strong>Agent Sale Report</strong> </a>
+
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navbar-vertical-aside-has-menu">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                               href="#">
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                <a href="{{ route('all.agent.customer.list') }}"><i class="tio-filter-list nav-icon"></i> <strong>All Agent Customer List</strong> </a>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="navbar-vertical-aside-has-menu">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link"
+                               href="#">
+
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+
+                                <a href="{{ route('all.agent.sale.commission.report') }}"><i class="tio-saving nav-icon"></i> <strong>All Agent Sale & Commission Report</strong> </a>
 
                                 </span>
                             </a>
@@ -145,7 +164,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>All Agent Customer List</strong> </a>
+                                <a href="{{ route('single.agent.sale.commission.report') }}"><i class="tio-poi-user  nav-icon"></i> <strong>Single Agent Sale & Commission Report</strong> </a>
 
                                 </span>
                             </a>
@@ -156,18 +175,7 @@
 
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
 
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>All Agent Sale & Commission Report</strong> </a>
-
-                                </span>
-                            </a>
-                        </li>
-                        <li class="navbar-vertical-aside-has-menu">
-                            <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="#">
-
-                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
-
-                                <a href="{{ route('dashboard') }}"><i class="tio-home-vs-1-outlined nav-icon"></i> <strong>All Agent Sale & Commission Summary</strong> </a>
+                                <a href="{{ route('all.agent.sale.commission.summary') }}"><i class="tio-filter-list nav-icon"></i> <strong>All Agent Sale & Commission Summary</strong> </a>
 
                                 </span>
                             </a>

@@ -52,7 +52,7 @@ php artisan serve
                                     <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">COrder ID</th>
+                                        <th scope="col">Order ID</th>
                                         <th scope="col">Total Items</th>
                                         <th scope="col">Pay Amount</th>
                                         <th scope="col">Sales Commission</th>

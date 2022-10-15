@@ -1,4 +1,4 @@
-php artisan serve
+
 @extends('layouts.back-end.app')
 
 @push('css_or_js')
@@ -22,29 +22,41 @@ php artisan serve
             <div class="row" style="margin-top: 20px">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <!-- Search -->
-                            <form>
-                                <div class="input-group input-group-merge input-group-flush">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="tio-search"></i>
-                                        </div>
-                                    </div>
-                                    <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                           placeholder="Search Brands" aria-label="Search orders" value="hp"
-                                           required="">
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                </div>
-                            </form>
-                            <!-- End Search -->
-                             <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Add Agent
-                            </a>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAgent"> Add
-                                Customer</button>
+                        <div class=card-header>
+                            <h4 class="card-header-title"><i class="tio-arrow-backward"></i> Single Agent Customer List</h4>
 
+                            <div class="card-header-form">
+                                <form class="form-inline" id="sorting">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="q" value="" placeholder="Search" />
+                                    </div>
+                                </form>
+                                <span class="ml-7"></span><button type="button" class="btn btn-warning ml-10"><i class="tio-print"></i> Print</button>
+                            </div>
                         </div>
+{{--                        <div class="card-header">--}}
+{{--                            <!-- Search -->--}}
+{{--                            <form>--}}
+{{--                                <div class="input-group input-group-merge input-group-flush">--}}
+{{--                                    <div class="input-group-prepend">--}}
+{{--                                        <div class="input-group-text">--}}
+{{--                                            <i class="tio-search"></i>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <input id="datatableSearch_" type="search" name="search" class="form-control"--}}
+{{--                                           placeholder="Search Brands" aria-label="Search orders" value="hp"--}}
+{{--                                           required="">--}}
+{{--                                    <button type="submit" class="btn btn-primary">Search</button>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                            <!-- End Search -->--}}
+{{--                             <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">--}}
+{{--                                Add Agent--}}
+{{--                            </a>--}}
+{{--                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAgent"> Add--}}
+{{--                                Customer</button>--}}
+
+{{--                        </div>--}}
                         <div class="card-body" style="padding: 0">
                             <div class="table-responsive">
                                 <table style="text-align: left;"
@@ -52,6 +64,7 @@ php artisan serve
                                     <thead class="thead-light">
                                     <tr >
                                         <th scope="col">Sl</th>
+                                        <th scope="col">Customer ID</th>
                                         <th scope="col">Customer Name</th>
                                         <th scope="col">Zone/Area</th>
                                         <th scope="col">Division</th>
@@ -398,7 +411,6 @@ php artisan serve
                             .get('https://api.coindesk.com/v1/bpi/currentprice.json')
                             .then(response => (this.lists = response))
                         console.log(response)
-
 
                         // axios.get("/agent/getData")
                         //     .then(response => {

@@ -54,6 +54,7 @@
                                         <th scope="col">Full Name</th>
                                         <th scope="col">Code</th>
                                         <th scope="col">Routing Number</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col" style="width: 100px" class="text-center">
                                             Action
                                         </th>
@@ -66,6 +67,12 @@
                                         <td>@{{  item.full_name }}</td>
                                         <td>@{{  item.code }}</td>
                                         <td>@{{  item.routing_number }}</td>
+                                        <td>
+                                            <label class="switch switch-status">
+                                                <input type="checkbox" class="status">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
                                         <td>
                                             <button @click.prevent="editData(item.id)" type="button"
                                                     class="btn btn-primary btn-sm" data-toggle="modal"

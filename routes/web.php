@@ -49,4 +49,11 @@ Route::get('/data-search',[BankController::class, 'search'])->name('data.search'
 // Customer
 Route::get('/customer-list',[CustomerController::class, 'index'])->name('all.customer');
 Route::get('/customer',[CustomerController::class, 'create'])->name('customer');
+Route::get('/customer-order-history',[CustomerController::class, 'customerOderHistory'])->name('customer.oder.history');
+Route::get('/single-customer-order-history',[CustomerController::class, 'singleCustomerOderHistory'])->name('single.customer.oder.history');
+Route::get('/all-agent-customer-list',[CustomerController::class, 'allAgentCustomerList'])->name('all.agent.customer.list');
+Route::get('/all-agent-sale-commission-report',[CustomerController::class, 'allAgentSaleCommissionReport'])->name('all.agent.sale.commission.report');
+Route::get('/single-agent-sale-commission-report',[CustomerController::class, 'singleAgentSaleCommissionReport'])->name('single.agent.sale.commission.report');
+Route::get('/all-agent-sale-commission-summary',[CustomerController::class, 'allAgentSaleCommissionSummary'])->name('all.agent.sale.commission.summary');
+Route::get('/agent-sale-report',[CustomerController::class, 'agentSaleReport'])->name('agent.sale.report');
 
